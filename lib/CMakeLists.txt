@@ -1,0 +1,79 @@
+#
+#cmake file for buiding rcar package
+#cmake compability
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.4)
+
+SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
+
+# cmake project name, default language is cxx
+PROJECT(rcar CXX)
+
+#project version
+SET ($(PROJECT_NAME)_MAJOR_VERSION 0)
+SET ($(PROJECT_NAME)_MINOR_VERSION 1)
+SET ($(PROJECT_NAME)_PATCH_LEVEL 0)
+SET (TARGET_NAME rcar)
+
+#project option
+IF (NOT CMAKE_BUILD_TYPE)
+    SET (CMAKE_BUILD_TYPE Debug)
+ENDIF()
+
+#include directoris
+INCLUDE_DIRECTORIES(
+    "${PROJECT_SOURCE_DIR}/."
+    "${PROJECT_SOURCE_DIR}/.."
+    "${PROJECT_SOURCE_DIR}/../3rdparty/include"
+    )
+
+# c++ definitions
+ADD_DEFINITIONS("-Wall -g")
+ADD_DEFINITIONS("-std=c++11")
+ADD_DEFINITIONS("-Wno-unused-local-typedefs")
+ADD_DEFINITIONS("-Wno-unused-variable")
+
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    ADD_DEFINITIONS("-DDEBUG")
+ENDIF()
+
+SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
+#project src
+
+AUX_SOURCE_DIRECTORY(. SRC_LIST)
+ADD_LIBRARY(${TARGET_NAME} STATIC ${SRC_LIST})
+#INSTALL(TARGETS rcar ../ lib)
+
+# add executable files
+LINK_DIRECTORIES("/usr/local/lib/"
+    "${PROJECT_SOURCE_DIR}/../3rdparty/lib"
+    "${PROJECT_SOURCE_DIR}/../3rdparty/lib/x86_64-linux-gnu"
+    )
+
+# set binary director
+MESSAGE(STATUS "Generating Makefile for linux...")
+SET (CMAKE_SYSTEM_NAME Linux) 
+SET (CMAKE_C_COMPILER gcc)
+SET (CMAKE_CXX_COMPILER g++)
+SET (CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}")
+
+SET (EXECUTABLE_BINARY_DIR Build)
+SET (LIBRARY_OUTPUT_PATH
+    ${PROJECT_SOURCE_DIR}/
+    CACHE PATH
+    "build and bin directory"
+    )
+
+SET(PROJECT_BINARY_DIR ${PROJECT_SOURCE_DIR})
+
+
+#display status message for important variables
+MESSAGE(STATUS "-------------------------------------------------")
+MESSAGE(STATUS "PROJECT_NAME = ${PROJECT_NAME}")
+MESSAGE(STATUS "CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
+MESSAGE(STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
+MESSAGE(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
+MESSAGE(STATUS "EXECUTABLE_OUTPUT_PATH = ${EXECUTABLE_OUTPUT_PATH}")
+MESSAGE(STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
+MESSAGE(STATUS "PROJECT_BINARY_DIR = ${PROJECT_BINARY_DIR}")
+MESSAGE(STATUS "------------------------------------------------")
+MESSAGE(STATUS)

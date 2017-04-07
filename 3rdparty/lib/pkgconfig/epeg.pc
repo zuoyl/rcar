@@ -1,0 +1,10 @@
+prefix=/home/jenson/Project/rcar/3rdparty
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: epeg
+Description: Epeg JPEG thumbnailer library
+Version: 0.9.1.042
+Libs: -L${libdir} -lepeg -ljpeg
+Cflags: -I${includedir}

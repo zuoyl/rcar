@@ -1,0 +1,13 @@
+prefix=/home/jenson/Project/rcar/3rdparty
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib/x86_64-linux-gnu
+includedir=${prefix}/include
+
+Name: rabbitmq-c
+Description: An AMQP 0-9-1 client library
+Version: 0.7.1
+URL: https://github.com/alanxz/rabbitmq-c
+Requires.private: 
+Libs: -L${libdir} -lrabbitmq
+Libs.private: rt
+CFlags: -I${includedir}

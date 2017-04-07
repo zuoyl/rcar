@@ -1,0 +1,91 @@
+1.g++
+ #sudo apt-get install g++
+
+2.cmake
+ #sudo apt-get install cmake
+ if there are some error for cmake package, run the following command
+ #sudo apt-get build-dep cmake
+
+3.scons
+ #sudo apt-get install scons
+
+4.curl
+ download libcurl from http://curl.haxx.se/download/html
+ #tar xzvf curl-7.38.0.tar.gz
+ #cd curl-7.38.0
+ #./configure --without-bzip2
+ #make
+ #sudo make install
+
+5.jsoncpp
+ download jsoncpp from http://sourceforge.net/projects/jsoncpp
+ #tar xzvf jsoncpp-src-0.50.tar.gz
+ #cd jsoncpp-src-0.50
+ #scons platform=linux-gcc
+
+6.mongodb
+ download mongdb from https://www.mongodb.org/downloads
+ #tar xzvf mongodb-src-r2.6.4.tar.gz
+ #cd mongodb-src-r2.6.4
+ #scons --prefix=/usr/local/mongo --full install
+
+7.boost
+download boos from  www.boost.org for version 1.54
+ #sudo apt-get install libboost-all-dev
+
+8.mongodb c++ client driver
+ download from https//github.com/mongodb/mongo-cxx-driver/wiki
+ mongo-cxx-driver-legacy-0.0-1.0.0-rc0.tar.gz
+ #tar xzvf mongo-cxx-driver-legacy-1.0.0.tar.gz
+ #cd mongo-cxx-driver-legacy-1.0.0.tar.gz
+ #scons --prefix=/home/jenson/rcar/3rdparty
+
+9.libevent
+ download from http://www.libevent.org 
+ # tar xzvf libevent...
+ # cd libevent...
+ # ./configure
+ # make
+ # sudo make install
+
+10.nginx
+ download nginx from www.nginx.org
+ download pcr from ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre
+ download nginx_upload_module from http://www.grid.net.ru/nginx/download/nginx_upload_module-2.2.0.tar.gz
+ download nginx_upload_progress_module from https://github.com/masterzen/nginx-upload-progress-module/tree/master
+ #tar xzvf prce-8.36.tar.gz
+ #tar xzvf nginx-1.6.2.tar.gz
+ #tar xzvf masterzen-nginx-upload-progress-module-v0.9.0-0-ga788dea.tar.gz
+ #tar xzvf nginx_upload_module-2.2.0.tar.gz
+   Patch for nginx_upload_module:
+   download patch file from http://paste.davromaniak.eu/index.php?show=110
+   (patch file is davromaniak.txt)
+   #cp davromaniak.txt [nginx_upload_module's path]
+   #patch ngx_http_upload_module.c davromaniak.txt
+ #cd nginx-1.6.2.tar.gz
+ #./configure --with-pcre=../pcre-8.3.6 --add-module=../nginx_upload_module-2.2.0 --add-module=../masterzen-nginx-upload-progress-module-v0.9.0-0-ga788dea 
+ #make
+ #sudo make install
+ #sudo cp ~/rcar/docs/nginx.conf /usr/local/nginx/conf/nginx.conf
+ 
+ start nginx
+ #cd /usr/local/nginx
+ #sbin/nginx -c conf/nginx.conf
+ stop nginx
+ #sudo killall nginx
+ check error log
+ #cat /usr/local/nginx/logs/error.log
+ check access log
+ #cat /usr/local/nginx/logs/access.log
+ 
+ 11.php
+ download php from http://cn.php.net/distributions/php-5.6.4.tar.gz
+#sudo apt-get install libxml2-dev
+#tar xzvf php-5.6.4.tar.gz
+#cd php-5.6.4
+ ./configure --prefix=/usr/local/php-5.6.4 --enable-fpm --enable-mbstring
+#make
+#sudo make install
+#sudo cp ~/rcar/docs/php-fpm.conf /usr/local/php-5.6.4/etc/php-fpm.conf
+#sudo  /usr/local/php-5.6.4/sbin/php-fpm
+
